@@ -1,0 +1,38 @@
+// output:index.html, pretty:true
+{% load static %}
+
+doctype html
+html(lang='en')
+  head
+    {% include 'search/meta.html'%}
+    include ../search/includes/main/bootstrap.html
+    include ../search/includes/main/css.html
+  
+  body
+    {% include 'search/nav.html' with q=query %}
+    {% include 'search/modals.html' %} 
+    #main(style='margin-top:78px')
+      .container(style='height:90vh')
+        .row
+          .col-md-12.col-xs-12.text-xs-center
+            .well
+              br 
+              h1 Submit a Index Suggestion 
+              .container
+                .row
+                  .col-md-12
+                    form#createPageForm(action='/lets/post/a/page/', method="post", enctype="multipart/form-data")
+                      {% csrf_token %} 
+                      .form-group
+                        label.custom-file
+                          input#mainImage.custom-file-input(type='file', name='mainImage')
+                          span.custom-file-control
+                      .form-group
+                        label(for='description') Description
+                        textarea#description.form-control(type='text', rows='10', placeholder='This course is not for the light of heart, you will experience the pinacle of over ten seconds of random thinking. All of which put together will allow you to be absolutely mesmerized by the complete and utter idiocy. Banana',name='description')
+                      .form-group
+                        //- label(for='title') Title
+                        input#title.form-control(type='text', aria-describedby='titleHelp', placeholder='How to peel a banana, with an acorn!',name='title')
+                    
+                    button.btn.btn-primary(type='submit') Submit
+{% static 'js/OneLetter/IndexSuggestions.js' %}

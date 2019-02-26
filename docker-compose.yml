@@ -1,0 +1,27 @@
+web:
+  container_name: hhweb
+  restart: always
+  build: ./web
+  expose:
+    - "8000"
+  volumes:
+    - ./web:/data/web
+    - ./web/static/:/var/www/hobbyhunter/static/
+  environment:
+    DEBUG: 'true'
+  command: /usr/local/bin/gunicorn hobbyHunter.wsgi:application -w 2 -b :8000
+
+nginx:
+  container_name: hhnginx
+  restart: always
+  build: ./nginx/
+  ports:
+    - "80:80"
+    - "443:443"
+  volumes:
+    - ./nginx/live/hobbyhunter.ca/:/etc/ssl/hobbyhunter/
+    - /www/static
+  volumes_from:
+    - web
+  links:
+    - web:web

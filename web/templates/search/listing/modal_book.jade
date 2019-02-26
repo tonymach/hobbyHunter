@@ -1,0 +1,30 @@
+//output:modal_book.html,pretty:false
+// Button trigger modal | add 
+
+{% load static %}
+#book.modal.fade(tabindex='-1', role='dialog', aria-labelledby='Signup', aria-hidden='true')
+  .modal-dialog(role='document')
+    .modal-content
+      .modal-header
+        button.close(type='button', data-dismiss='modal', aria-label='Close')
+          span(aria-hidden='true')
+            i.fa.fa-times(aria-hidden='')
+        h4#myModalLabel.modal-title {{listing.title}}    
+      .modal-body
+        .row
+          hr    
+          .col-md-12
+            {% for session in schedule %}
+            .row(style='margin:2%')
+              .col-md-6
+                h6.datetime {{session.datetime}}
+              .col-md-4
+                h6.spots Spots Available: {{session.spots}}
+              .col-md-2
+                  button.btn.btn-secondary(onclick='book("{{session.id}}", "{{listing.merchant}}")') Book
+            {% endfor %}
+            
+
+link(rel='stylesheet', href="{% static 'css/sweetalert.css' %}")                 
+script(src="{% static 'js/sweetalert.min.js' %}")            
+script(src="{% static 'js/page/book.js' %}")            

@@ -1,0 +1,72 @@
+// output:index.html, pretty:true
+{% load static %}
+
+doctype html
+html(lang='en')
+  head
+    {% include 'search/meta.html'%}
+    include ../../search/includes/main/bootstrap.html
+    include ../../search/includes/main/css.html
+  
+  body
+    {% include 'search/nav.html' with q=query %}
+    {% include 'search/modals.html' %} 
+    #main(style='margin-top:78px')
+      .container(style='height:90vh')
+        .row
+          .col-md-12.col-xs-12.text-xs-center
+            .well
+              br 
+              h1 Manage your pages
+                {% for listing in pages %}
+                .container.listing
+                  .row
+                    .col-md-4
+                      {% if listing.mainImage %}
+                      img.img-rounded(src='{{ listing.mainImage.url }}', width='125', height='125')
+                      {% endif %}
+                      {% if not listing.mainImage_thumbnail.url %}
+                      img(src='http://placehold.it/125x125')
+                      {% endif %}
+                    .col-md-4
+                      .row
+                        .col-md-6.text-xs-center
+                          h3 <b>{{ listing.title }} </b>
+                        .col-md-6.text-xs-center
+                        .col-md-12
+                          hr
+                        .col-md-6 
+                          h6 <i class="fa fa-money" aria-hidden="true"></i>    : {{listing.averageCost}} {{listing.country}}
+                    .col-md-4
+                      .dropdown
+                        button#dropdownMenuButton.btn.btn-secondary.dropdown-toggle(type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false') Settings
+                        .dropdown-menu(aria-labelledby='dropdownMenuButton')
+                          a.dropdown-item(onclick='') Edit
+                          a.dropdown-item(href='/listing/{{listing.pageId}}/') View
+                          a.dropdown-item(onclick='') Manage 
+                      .dropdown
+                        button#dropdownMenuButton.btn.btn-secondary.dropdown-toggle(type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false') Calendar and Sessions
+                        .dropdown-menu(aria-labelledby='dropdownMenuButton')
+                          a.dropdown-item(onclick='viewSessions("{{listing.pageId}}")') View Sessions
+                          a.dropdown-item(data-toggle="modal",data-target="#createSession", data-pageId='{{listing.pageId}}') Add Session
+                            
+
+
+          {%endfor%}
+          {% if pages %}
+          br
+          h1.display-1 OR
+          br
+          {% endif %}
+        {% include 'merchant/includes/create.html' %}
+        {% include 'merchant/includes/createSession.html' %}
+    
+        {%if sessions%}
+        {% include 'merchant/includes/viewSession.html' with sessions=sessions %}
+        {%else%}
+        {% include 'merchant/includes/viewSession.html' %}
+        {%endif%}
+            
+    {% include 'search/footer.html' %}          
+    
+    

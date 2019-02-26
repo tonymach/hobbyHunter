@@ -1,0 +1,95 @@
+{% load static %}<!DOCTYPE html>
+<html lang="en">
+  <head>{% include 'search/meta.html' %}<link rel="stylesheet" href= "{% static 'css/bootstrap.min.css'%}" integrity="sha384-2hfp1SzUoho7/TsGGGDaFdsuuDL0LX2hnUp6VkX3CUQ2K4K+xjboZdsXyp4oUHZj" crossorigin="anonymous">
+<link rel="stylesheet" href= "{% static 'css/flexbox.min.css'%}">
+
+<script src='{% static "js/jquery.min.js"%}' ></script>
+
+<script src='{% static "js/tether.min.js"%}' ></script>
+<script src='{% static "js/cookie.js"%}' ></script>
+<script src='{% static "js/bootstrap.min.js"%}' integrity="sha384-VjEeINv9OSwtWFLAtmc4JCtEJXXBub00gtSnszmspDLCtC0I4z4nqz7rEFbIZLLU" crossorigin="anonymous"></script>
+
+<!-- Base files -->
+<link rel="stylesheet" href= "{% static 'css/main.css'%}">
+
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600,700i,900|Yellowtail|Libre+Baskerville:700" rel="stylesheet">
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
+<script src="//github.hubspot.com/tether/dist/js/tether.js"></script>
+
+    <style>
+      .fa{
+        margin:3%;
+      }
+    </style>
+  </head>
+</html>
+<body>
+  {% if listing %}
+  {% include 'search/listing/modal_book.html' with listing=listing%}
+  {% include 'search/modals.html' %}          
+  {% include 'search/nav.html' with q=query %}
+  <div id="gallery" style="background-image:url('{{listing.mainImage.url}}')" class="container"><img src="http://placehold.it/125x125" alt="{{listing.merchant}}" data-toggle="tooltip" data-placement="top" title="Hi there! I'm {{listing.merchant}}" style="position: relative; top:55vh; left: 0 ;" class="img-circle"></div>
+  <div id="listingContainer" class="container">
+    <div class="row">
+      <div class="col-md-4 col-xs-12 text-xs-center">
+        <h3><b>{{listing.title}} </b></h3>
+      </div>
+      <div class="col-md-2 col-xs-6 text-xs-center">{%for i in stars%}<i aria-hidden="true" class="fa fa-star black"></i>{% endfor %}
+        <h3><i aria-hidden="true" class="fa fa-money"></i>    : {{listing.averageCost}}</h3>
+      </div>
+      <div class="col-md-3 col-xs-6 text-xs-center">
+        <h6>  <i aria-hidden="true" data-toggle="tooltip" data-placement="top" title="100 Neoph points, which are awarded to you every time you try something new, get enough of them and you'll earn some awesome things! Learn more at by clicking Huh? " class="fa fa-2x fa-rocket"></i><i aria-hidden="true" data-toggle="tooltip" data-placement="top" title="This business is verified" class="fa fa-2x fa-user"></i><i aria-hidden="true" data-toggle="tooltip" data-placement="top" title="This business is certified to teach this" class="fa fa-2x fa-certificate"></i><i aria-hidden="true" data-toggle="tooltip" data-placement="top" title="This is really popular, try it!" class="fa fa-2x fa-fire"></i></h6>
+      </div>
+      <div class="col-md-3 col-xs-12 text-xs-center">
+        <div class="row flex-items-xs-middle">
+          <div class="col-md-12 text-xs-center">
+            <button href="#" data-toggle="modal" data-target="#book" class="btn btn-lg btn-secondary">Check & Book</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-9">
+        <hr>
+        <div class="row">
+          <div class="col-md-12">
+            <h4 style="display:block"><i aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Description" class="fa fa-2x fa-question-circle inlineDescriptor"></i><span class="black">
+                 
+                {{listing.description}}</span></h4><br><br>
+          </div>
+          <div class="col-md-12">
+            <h4><i aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Reviews" class="fa fa-2x fa-check-circle-o inlineDescriptor"></i><span><b> Reviews </b></span></h4><br><br>{%if review%}
+            {%for review in listing.reviews%}
+            <div class="row flex-items-xs-middle">
+              <div class="col-md-2 col-xs-2"><img src="http://placehold.it/50x50" alt="{{listing.merchant}}" data-toggle="tooltip" data-placement="top" title="{{review.name}}" class="img-circle"></div>
+              <div class="col-md-10 col-xs-10">
+                <h6>{{review.text}}</h6>
+              </div>
+            </div>{%endfor%}
+            {%else%}
+            <h4 class="black">  No reviews quite yet, be the FIRST!</h4>{%endif%}
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">{%if fact%}
+        <hr><br><br>
+        <h3 class="title upper">Facts</h3>
+        <h6 class="lead">About {{fact.term}}</h6>
+        <h3>{{fact.description}}</h3>{%endif %}
+      </div>
+    </div>
+  </div>
+  <script>
+    $(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+    })
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  </script>
+</body>{% endif %}

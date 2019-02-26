@@ -1,0 +1,98 @@
+// output:index.html, pretty:true
+
+{% load static %}
+doctype html
+html(lang='en')
+  head
+    {% include 'search/meta.html' %}
+    include ../includes/main/bootstrap.html
+    include ../includes/main/css.html
+    style.
+      .fa{
+        margin:3%;
+      }
+body
+  {% if listing %}
+  {% include 'search/listing/modal_book.html' with listing=listing%}
+  {% include 'search/modals.html' %}          
+  {% include 'search/nav.html' with q=query %}
+  #gallery.container(style="background-image:url('{{listing.mainImage.url}}')")
+    img(src='http://placehold.it/125x125', alt='{{listing.merchant}}', data-toggle='tooltip', data-placement='top', title="Hi there! I'm {{listing.merchant}}", style='position: relative; top:55vh; left: 0 ;').img-circle
+  #listingContainer.container
+    .row
+      .col-md-4.col-xs-12.text-xs-center
+        h3
+          b {{listing.title}} 
+      .col-md-2.col-xs-6.text-xs-center
+        | {%for i in stars%}
+        i.fa.fa-star.black(aria-hidden='true')
+        | {% endfor %}
+        h3
+          i.fa.fa-money(aria-hidden='true')
+          |     : {{listing.averageCost}}
+      .col-md-3.col-xs-6.text-xs-center
+        h6   
+          i.fa.fa-2x.fa-rocket(aria-hidden='true', data-toggle='tooltip', data-placement='top', title="100 Neoph points, which are awarded to you every time you try something new, get enough of them and you'll earn some awesome things! Learn more at by clicking Huh? ")
+          i.fa.fa-2x.fa-user(aria-hidden='true', data-toggle='tooltip', data-placement='top', title="This business is verified")
+          i.fa.fa-2x.fa-certificate(aria-hidden='true', data-toggle='tooltip', data-placement='top', title="This business is certified to teach this")
+          i.fa.fa-2x.fa-fire(aria-hidden='true', data-toggle='tooltip', data-placement='top', title="This is really popular, try it!")
+      .col-md-3.col-xs-12.text-xs-center
+        .row.flex-items-xs-middle
+          .col-md-12.text-xs-center
+            button.btn.btn-lg.btn-secondary(href='#', data-toggle='modal', data-target='#book') Check & Book
+            
+      .col-md-9
+        hr
+        .row
+          .col-md-12
+          
+            //- h4.black(style='display:block')
+            h4(style='display:block')
+              i.fa.fa-2x.fa-question-circle.inlineDescriptor(aria-hidden='true', data-toggle='tooltip', data-placement='top', title='Description')
+              span.black 
+                {{listing.description}}
+            br
+            br
+          .col-md-12
+            h4
+              i.fa.fa-2x.fa-check-circle-o.inlineDescriptor(aria-hidden='true', data-toggle='tooltip', data-placement='top', title='Reviews')
+              span <b> Reviews </b>
+            br 
+            br
+            {%if review%}
+            {%for review in listing.reviews%}
+            .row.flex-items-xs-middle
+              .col-md-2.col-xs-2
+                img(src='http://placehold.it/50x50', alt='{{listing.merchant}}', data-toggle='tooltip', data-placement='top', title="{{review.name}}" ).img-circle
+              .col-md-10.col-xs-10
+                h6 {{review.text}}
+            {%endfor%}
+            {%else%}
+            h4.black   No reviews quite yet, be the FIRST!
+            {%endif%}
+      .col-md-3
+        //- Facts about x service such as bartending will show up here from google
+        {%if fact%}
+        hr
+        br
+        br
+        h3.title.upper Facts
+        h6.lead About {{fact.term}}
+        h3 {{fact.description}}
+        {%endif %}
+        
+  //- General purpose dev js
+  script.
+    $(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+    })
+
+
+
+
+
+
+
+
+
+{% endif %}

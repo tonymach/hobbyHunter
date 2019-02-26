@@ -1,0 +1,180 @@
+// Main styling => Base
+// Oct. 10, 16
+
+@import mixins
+@import fontface
+@include fontFace('Bebas Neue', 'https://hobbyhunterstatic.s3.amazonaws.com/fonts/BebasNeue')
+
+//
+// For fonts be sure to convert using transfonter.org
+//
+
+$brand: #c17c53
+$superLightBrand: #f8f1ec
+$lightBrand: lighten($brand, 10)
+$darkBrand: darken($brand, 10)
+$black: #000
+$white: #fff
+$brandFont: 'Raleway'
+$brandFontFancy: 'Yellowtail'
+$brandFontBlocky: 'Bebas Neue'
+// Defaults
+body
+  color: $brand
+  font-family: $brandFont
+  div
+    transition: all 0.3s ease
+
+nav
+  background:
+    // color: rgba(255,255,255,0.65) !important
+  color: $brand !important
+  border:
+    bottom: 3px solid $brand
+
+
+
+// Link things
+a
+  color: $brand
+a:hover, a:active, .hover
+  color: $lightBrand
+  text-decoration: none
+a:visited
+  color: $darkBrand
+
+// Button things
+button
+  color: $lightBrand !important
+  outline: none !important
+  transition: color 250ms
+  transition: background-color 250ms
+  &:active, &:focus, &:hover, &:focus, input[type=submit], .hover
+    outline: none !important
+    color: $brand !important
+
+a
+  .btn
+    outline:  $brand !important
+    background-color: rgba(0,0,0,0)
+    &:active, &:focus, &:hover
+      outline: $lightBrand !important
+
+
+
+.navbar-brand
+  font-family: $brandFontFancy
+  color: $brand !important
+
+.nav-link
+  color: $brand !important
+a
+  color: $lightBrand
+.nav-item
+  transition: 150ms background
+  border-radius: 3px
+  &:hover
+    background-color: $lightBrand
+    a
+      color: #fff !important
+    a.dropdown-item
+      color: $brand !important
+
+
+// Custom divs
+#main
+  @include parallax('')
+  margin: 0px
+  padding: 0px
+  max-width: 100%
+  max-height: 100%
+
+#gallery
+  margin-top: 68px
+  height: 75vh
+  width: 100%
+  padding: none
+  border-radius: 25px
+  border: 2px solid $lightBrand
+  box-shadow: 6px 6px 6px $superLightBrand
+  background:
+    attachment: fixed
+    position: center
+    repeat: no-repeat
+    size: cover
+
+
+#listingContainer
+  padding: 3%
+  border-top: 3px solid $lightBrand
+
+.white
+  color: #ffffff !important
+.black
+  color: $black !important
+
+.inlineDescriptor
+  margin-bottom: -10px !important
+
+.listing
+  margin: 1%
+  padding: 3%
+  transition: 50ms background-color
+  &:hover
+    background: $superLightBrand
+    border-radius: 20px
+
+hr
+  color: $lightBrand
+  margin: 2%
+
+
+// Helper classes
+
+
+i.fa-times
+  color: $brand !important
+
+
+.title
+  font-weight: bold
+
+.upper
+  text-transform: uppercase
+
+.pool
+  border-radius: 10px 10px 10px 10px
+
+.blocky
+  font-family: $brandFontBlocky
+
+
+// Custom styles for calendar thingy
+.calendarButton
+  color: $brand
+  transition: color 250ms
+
+  &:hover, .hover
+    color: $lightBrand
+
+
+
+//
+// Choice boxes for index
+//
+
+.choice
+  padding: 15px
+  img
+    width: 100%
+    height: 60%
+    padding-bottom: 10px
+
+.choice:hover, .choice.hover
+  box-shadow: 1px 1px $lightBrand, 2px 2px $lightBrand, 3px 3px $lightBrand
+  -webkit-transform: translateX(-3px)
+  transform: translateX(-3px)
+
+
+.overlay
+  padding-top: 10px

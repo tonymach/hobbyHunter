@@ -1,0 +1,10 @@
+//output:indexSuggestions.html, pretty:false
+.container#main(style="min-height:100vh;margin-top:54px;")
+{%for choice in choices%}
+.col-lg-6.col-md-6.col-sm-6.col-xs-12.choice
+  .hovereffect
+    img.img-responsive(src='{{choice.mainImage_thumbnail.url}}', alt='{{choice.description}}')
+    .overlay    
+      h2 {{choice.skill}}
+      p
+        h1.upper(href='/?q={{choice.skill}}',style='margin:5px;') Check it

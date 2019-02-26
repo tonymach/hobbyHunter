@@ -1,0 +1,32 @@
+// output:viewSession.html, pretty:false
+{% load static %}
+
+#viewSessions.modal.modal-fullscreen.force-fullscreen.fade.show(tabindex='-1', role='dialog', aria-labelledby='createPage', aria-hidden='true')
+  .modal-dialog(role='document')
+    .modal-content
+      .modal-header
+        button.close(type='button', data-dismiss='modal', aria-label='Close')
+          span(aria-hidden='true')
+            i.fa.fa-times(aria-hidden='false')
+        h4#myModalLabel.modal-title View Sessions
+      .modal-body
+        //- WIll be fullscreen and pretty, let's make it all work first
+        {%if sessions%}
+        {%for session in sessions%}
+        .row
+          .col-md-4
+            h6 {{session.datetime}}
+          .col-md-4
+            h6 Spots: {{session.spots}}
+          .col-md-4
+            a.btn.btn-secondary.startSessionButton(href='/merchant/start/session/{{session.id}}/') Start Session  
+        hr
+            
+        {% endfor %}
+        {%else%}
+        h1.display-1.upper No sessions
+        {% endif %}
+        
+        
+        
+script(src="{% static 'js/merchant/viewSession.js'%}")

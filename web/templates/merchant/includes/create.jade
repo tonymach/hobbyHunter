@@ -1,0 +1,45 @@
+//output:create.html, pretty:false
+{% load static %}
+.row 
+  .col-md-12.col-xs-12
+    h1 Create a Page
+    hr
+    button.btn.btn-primary(href='#', data-toggle='modal', data-target='#createPage') Let's make a Page
+
+
+//- a.nav-link(href='#', data-toggle='modal', data-target='#signup') Signup Example
+
+#createPage.modal.modal-fullscreen.force-fullscreen.fade(tabindex='-1', role='dialog', aria-labelledby='createPage', aria-hidden='true')
+  .modal-dialog(role='document')
+    .modal-content
+      .modal-header
+        button.close(type='button', data-dismiss='modal', aria-label='Close')
+          span(aria-hidden='true')
+            i.fa.fa-times(aria-hidden='')
+        h4#myModalLabel.modal-title Create a Page
+      .modal-body
+        //- WIll be fullscreen and pretty, let's make it all work first
+        form#createPageForm(action='/lets/post/a/page/', method="post", enctype="multipart/form-data")
+          {% csrf_token %} 
+          .form-group
+            //- label(for='title') Title
+            input#title.form-control(type='text', aria-describedby='titleHelp', placeholder='How to peel a banana, with an acorn!',name='title')
+            small#titleHelp.form-text.text-muted Simple and descriptive, preffered format: </br>[Session Name] Ex/ Basics of Bartending
+            .form-group
+              label(for='description') Description
+              textarea#description.form-control(type='text', rows='10', placeholder='This course is not for the light of heart, you will experience the pinacle of over ten seconds of random thinking. All of which put together will allow you to be absolutely mesmerized by the complete and utter idiocy. Banana',name='description')
+            .form-group
+            
+              label(for='averageCost') average Cost per Session
+              .input-group
+                span.input-group-addon#cashAddon $
+                input#averageCost.form-control(type='number', placeholder='You know how much you cost you fancy you', name='averageCost')
+                span.input-group-addon#costAddon .00 CAD
+            .form-group
+              label.custom-file
+                input#mainImage.custom-file-input(type='file', name='mainImage')
+                span.custom-file-control
+
+            button.btn.btn-primary(type='submit') Submit
+  
+script(src="{% static 'js/merchant/postPages.js' %}")

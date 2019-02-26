@@ -1,0 +1,194 @@
+@font-face {
+  font-family: "Bebas Neue";
+  src: url("https://hobbyhunterstatic.s3.amazonaws.com/fonts/BebasNeue.otf");
+  src: url("https://hobbyhunterstatic.s3.amazonaws.com/fonts/BebasNeue.eot");
+  src: url("https://hobbyhunterstatic.s3.amazonaws.com/fonts/BebasNeue.eot?#iefix") format("embedded-opentype"), url("https://hobbyhunterstatic.s3.amazonaws.com/fonts/BebasNeue.woff") format("woff"), url("https://hobbyhunterstatic.s3.amazonaws.com/fonts/BebasNeue.ttf") format("truetype"), url("https://hobbyhunterstatic.s3.amazonaws.com/fonts/BebasNeue.svg#Bebas Neue") format("svg");
+  font-style: normal;
+  font-weight: normal;
+}
+
+body {
+  color: #c17c53;
+  font-family: "Raleway";
+}
+
+body div {
+  transition: all 0.3s ease;
+}
+
+nav {
+  color: #c17c53 !important;
+  border-bottom: 3px solid #c17c53;
+}
+
+a {
+  color: #c17c53;
+}
+
+a:hover, a:active, .hover {
+  color: #cf9978;
+  text-decoration: none;
+}
+
+a:visited {
+  color: #a5633c;
+}
+
+button {
+  color: #cf9978 !important;
+  outline: none !important;
+  transition: color 250ms;
+  transition: background-color 250ms;
+}
+
+button:active, button:focus, button:hover, button:focus, button input[type=submit], button .hover {
+  outline: none !important;
+  color: #c17c53 !important;
+}
+
+a .btn {
+  outline: #c17c53 !important;
+  background-color: transparent;
+}
+
+a .btn:active, a .btn:focus, a .btn:hover {
+  outline: #cf9978 !important;
+}
+
+.navbar-brand {
+  font-family: "Yellowtail";
+  color: #c17c53 !important;
+}
+
+.nav-link {
+  color: #c17c53 !important;
+}
+
+a {
+  color: #cf9978;
+}
+
+.nav-item {
+  transition: 150ms background;
+  border-radius: 3px;
+}
+
+.nav-item:hover {
+  background-color: #cf9978;
+}
+
+.nav-item:hover a {
+  color: #fff !important;
+}
+
+.nav-item:hover a.dropdown-item {
+  color: #c17c53 !important;
+}
+
+#main {
+  background-image: url("");
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin: 0px;
+  padding: 0px;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+#gallery {
+  margin-top: 68px;
+  height: 75vh;
+  width: 100%;
+  padding: none;
+  border-radius: 25px;
+  border: 2px solid #cf9978;
+  box-shadow: 6px 6px 6px #f8f1ec;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+#listingContainer {
+  padding: 3%;
+  border-top: 3px solid #cf9978;
+}
+
+.white {
+  color: #ffffff !important;
+}
+
+.black {
+  color: #000 !important;
+}
+
+.inlineDescriptor {
+  margin-bottom: -10px !important;
+}
+
+.listing {
+  margin: 1%;
+  padding: 3%;
+  transition: 50ms background-color;
+}
+
+.listing:hover {
+  background: #f8f1ec;
+  border-radius: 20px;
+}
+
+hr {
+  color: #cf9978;
+  margin: 2%;
+}
+
+i.fa-times {
+  color: #c17c53 !important;
+}
+
+.title {
+  font-weight: bold;
+}
+
+.upper {
+  text-transform: uppercase;
+}
+
+.pool {
+  border-radius: 10px 10px 10px 10px;
+}
+
+.blocky {
+  font-family: "Bebas Neue";
+}
+
+.calendarButton {
+  color: #c17c53;
+  transition: color 250ms;
+}
+
+.calendarButton:hover, .calendarButton .hover {
+  color: #cf9978;
+}
+
+.choice {
+  padding: 15px;
+}
+
+.choice img {
+  width: 100%;
+  height: 60%;
+  padding-bottom: 10px;
+}
+
+.choice:hover, .choice.hover {
+  box-shadow: 1px 1px #cf9978, 2px 2px #cf9978, 3px 3px #cf9978;
+  -webkit-transform: translateX(-3px);
+  transform: translateX(-3px);
+}
+
+.overlay {
+  padding-top: 10px;
+}

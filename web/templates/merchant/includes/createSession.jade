@@ -1,0 +1,28 @@
+// output:createSession.html, pretty:false
+{% load static %}
+
+#createSession.modal.modal-fullscreen.force-fullscreen.fade.show(tabindex='-1', role='dialog', aria-labelledby='createPage', aria-hidden='true')
+  .modal-dialog(role='document')
+    .modal-content
+      .modal-header
+        button.close(type='button', data-dismiss='modal', aria-label='Close')
+          span(aria-hidden='true')
+            i.fa.fa-times(aria-hidden='')
+        h4#myModalLabel.modal-title Add a Session
+      .modal-body
+        //- WIll be fullscreen and pretty, let's make it all work first
+        form#createSessionForm(action='/lets/post/a/page/')
+          {% csrf_token %} 
+          input#pageId(type='hidden' name='pageId', value='')
+          .form-group
+            //- label(for='title') Title
+            input.form-control#datetime(type='datetime-local', placeholder='When', name='datetime' value='{{datetime}}')      
+            small#titleHelp.form-text.text-muted What day and what time is this class held on
+          .form-group
+            label(for='name') Number of Spots
+            input.form-control#spots(type='number',min='0',max='1000' name='spots' placeholder='30')
+          button.btn.btn-primary(type='submit') Set
+          
+
+script(src="{% static 'js/merchant/createSession.js'%}")
+script(src="{% static 'js/moment.min.js'%}")

@@ -1,0 +1,38 @@
+//output:nav.html, pretty:false
+
+nav.navbar.navbar-ligh.bg-faded.navbar-fixed-top 
+  button.navbar-toggler.hidden-sm-up.pull-xs-right(type='button', data-toggle='collapse', data-target='#exCollapsingNavbar2', aria-controls='exCollapsingNavbar2', aria-expanded='false', aria-label='Toggle navigation', style='color:#c17c53 !important;') ☰
+  a.navbar-brand.hidden-xs-down(href='/') <b> Hobby Hunter </b>
+  form.form-inline.pull-xs-left(method='GET', action='/', style='min-width:50%;')
+    input.form-control(type='text', placeholder='Look for a service', style='z-index:2; min-width:100%;', name='q' value='{{q}}')
+  
+
+  #exCollapsingNavbar2.collapse.navbar-toggleable-xs
+    ul.nav.navbar-nav.pull-xs-right
+      li.nav-item
+        a.nav-link(href='/huh/') Huh? 
+
+      {%if user.is_authenticated%}
+      li.nav-item.btn-group
+        a#useractions.dropdown-toggle.nav-link(data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')  Bonjour, {{user}}
+        .dropdown-menu(aria-labelledby='useractions')
+        
+          {%if not user.is_merchant %}
+          a.dropdown-item(href='/my/calendar/') Calendar
+          a.dropdown-item(href='/my/settings/') Settings
+          a.dropdown-item(href='/lets/logout/') Logout  
+          {% endif %}
+          {% if user.is_merchant %}
+          a.dropdown-item(href='/merchant/') Calendar
+          a.dropdown-item(href='/merchant/pages/') Manage Pages
+          a.dropdown-item(href='/merchant/settings/') Settings
+          a.dropdown-item(href='/lets/logout/') Logout  
+          {% endif %}
+          
+      {%else%}
+      li.nav-item
+        a.nav-link(href='#', data-toggle='modal', data-target='#signup') Signup 
+      li.nav-item
+        a.nav-link(href='#', data-toggle='modal', data-target='#login') Login
+      {%endif%}
+      

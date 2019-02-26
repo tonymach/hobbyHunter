@@ -1,0 +1,40 @@
+// output:index.html, pretty:false
+{% load static %}
+
+doctype html
+html(lang='en')
+  head
+    {% include 'search/meta.html'%}
+    include ../../search/includes/main/bootstrap.html
+    include ../../search/includes/main/css.html
+  
+  body
+    {% include 'search/modals.html' %}        
+    #main(style='margin-top:78px')
+      .container(style='height:90vh')
+        .row(style='height: inherit;')
+          .col-md-12.col-xs-12.text-xs-center
+            .well
+              h1.display-4 Login
+              hr
+              form(method='POST', action='/lets/log/the/merchant/in/')
+                {% csrf_token %} 
+                .row
+                  .col-md-12
+                    .form-group.row
+                      label.col-xs-4.col-form-label(for='email') User Name
+                      .col-xs-6
+                        input#email.form-control(type='email', name='user', required, placeholder='x@anthonymachula.ca')
+                  .col-md-12
+                    .form-group.row
+                      label.col-xs-4.col-form-label(for='password') Password
+                      .col-xs-6
+                        input#password.form-control(type='password', name='pass', required, placeholder='Super Duper Secret Password')
+                      .col-xs-2 
+                        button.btn.btn-success(type='submit') Login
+
+                
+                  //- Add payment options here in the future
+        
+    {% include 'search/footer.html' %}          
+    

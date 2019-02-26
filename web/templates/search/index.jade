@@ -1,0 +1,92 @@
+//output:index.html,pretty:false
+{% load static %}
+
+doctype html
+html(lang='en')
+  head
+    {% include 'search/meta.html'%}
+    include includes/main/bootstrap.html
+    include includes/main/css.html
+    
+
+  body
+    {% include 'search/nav.html' with q=query %}
+    {% include 'search/modals.html' %}          
+    {% if not query %}
+    .container#main(style="min-height:100vh;margin-top:58px;")
+      .col-lg-12.col-md-12.col-xs-12.choice.text-xs-center.blocky
+        h1.upper <b> Get out there, join your friends and find something fun to do. </b>
+        
+      .col-lg-6.col-md-6.col-sm-6.col-xs-12.choice
+        .hovereffect
+          a(href='/preview/?q=programming') 
+            img.img-responsive(src="{% static 'img/index/programming.jpg' %}", alt='Programming a crazy, ridiculous and dangerous art.')
+            .overlay.text-xs-center
+              h2.blocky Programming
+              p
+                a.upper.btn(href='/preview/?q=programming')
+                  i.fa.fa-2x.fa-arrow-circle-o-right.inlineDescriptor(aria-hidden='true', data-toggle='tooltip', data-placement='top', title='Check it out!')
+
+      .col-lg-6.col-md-6.col-sm-6.col-xs-12.choice
+        .hovereffect
+          a(href='/preview/?q=koffee Connoisseur')
+            img.img-responsive(src="{% static 'img/index/pirateThings.jpg' %}", alt='Learn the stupendous art of being a pirate, Arr!.')
+            .overlay.text-xs-center
+              h2.blocky Koffee Connoisseur
+              p
+                a.upper.btn(href='/?q=koffee Connoisseur')
+                  i.fa.fa-2x.fa-arrow-circle-o-right.inlineDescriptor(aria-hidden='true', data-toggle='tooltip', data-placement='top', title='Check it out!')
+                
+              
+      
+  
+    
+    {% endif %}
+    {% if query %}
+    .container(style='height:100vh;margin-top:120px')
+      {% if pages != None %}
+      
+      {% for listing in pages %}
+      .container.listing
+        a(href='/preview/listing/{{listing.pageId}}/', tabindex='{{forloop.counter}}')
+          .row
+            .col-md-4.text-xs-center(style='margin-bottom:1%;')
+              {% if listing.mainImage %}
+              img.img-rounded(src='{{ listing.mainImage_thumbnail.url }}', width='125', height='125')
+              {% endif %}
+              {% if not listing.mainImage %}
+              img(src='http://placehold.it/125x125')
+              {% endif %}
+            .col-md-8
+              .row
+                .col-md-6.text-xs-center
+                  h3 <b>{{ listing.title }} </b>
+                .col-md-6.text-xs-center
+                  {%for i in  stars%}
+                  i.fa.fa-star(aria-hidden='true')
+                  {% endfor %}
+                .col-md-12
+                  hr
+                .col-md-6 
+                  h6 <i class="fa fa-money" aria-hidden="true"></i>    : {{listing.averageCost}} {{listing.country}}
+                .col-md-6  
+                  h6 Can be found at 101 infinity loop drive
+                input.lat(type='hidden', val='{{listing.lat}}', id='{{listing.pageId}}')
+                input.lon(type='hidden', val='{{listing.lon}}', id='{{listing.pageId}}')
+              
+      {% endfor %}
+      
+      {% else %}
+      {% include 'search/tryme.html' %}
+      {% endif %}  
+      {% endif %}
+    hr
+    
+    {% include 'search/footer.html' %}          
+
+script.
+  $( document ).ready(function() {
+    $('#choice1').trigger('mouseover');  // Click the now-showing element
+    
+  });
+script(src="{% static 'js/index/choice.js' %}")

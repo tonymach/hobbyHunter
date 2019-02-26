@@ -1,0 +1,56 @@
+// output:calendar.html, pretty:false
+{% load qr_tags %}
+
+#main(style='margin-top:78px')
+  .container(style='height:90vh')
+    .row
+      .col-md-6.col-xs-12.text-xs-center
+        .well
+            h1(style='margin-bottom: 10%') Upcoming Events
+      .col-md-6
+      .col-md-12
+      
+      {% if pages %}
+      .row
+      {% for page in pages%}
+      .col-md-4
+        h6   {{page.title}}
+      .col-md-4
+        {{page.when}}
+      .col-md-4
+        button.btn.btn-primary(href="#",data-toggle='modal', data-target='#{{page.sessionId}}') Get <i> Scan Code </i>
+        
+        .modal.fade(tabindex='-1', role='dialog', aria-labelledby='Scan Code', aria-hidden='true', id='{{page.sessionId}}')
+          .modal-dialog(role='document')
+            .modal-content
+              .modal-header 
+                button.close(type='button', data-dismiss='modal', aria-label='Close')
+                  span(aria-hidden='true')
+                    i.fa.fa-times(aria-hidden='')
+                h4#myModalLabel.modal-title {{page.title}}
+              .modal-body.text-xs-center
+                h1.display-4.upper Scan Me!
+                div(id='#{{page.sessionId}}')
+                  {% qr_from_text page.key %}
+
+      {% endfor %}
+      
+      {% else %}
+      .col-xs-12(style='margin-top:15vh')
+        {% include 'search/tryme.html' %}
+      
+      {% endif %}
+
+      //- .col-md-1.col-xs-1
+      //-   .row.flex-items-xs-middle
+      //-     .col-xs-12
+      //-       a(onclick='up()')
+      //-         i.fa.fa-plus.calendarButton(aria-hidden='true')
+      //-       br
+      //-       a(onclick='down()')
+      //-         i.fa.fa-minus.calendarButton(aria-hidden='true')
+      //- .col-md-5.col-xs-11
+      //-   input.form-control(type='date', placeholder='When', name='date' value='{{datetime}}')      
+      //- .col-xs-12
+        hr  
+      

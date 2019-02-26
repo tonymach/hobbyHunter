@@ -1,0 +1,40 @@
+// output:index.html, pretty:false
+{% load static %}
+
+doctype html
+html(lang='en')
+  head
+    {% include 'search/meta.html'%}
+    include ../../search/includes/main/bootstrap.html
+    include ../../search/includes/main/css.html
+  
+  body
+      
+    {% include 'search/nav.html' with q=query %}
+    {% include 'search/modals.html' %} 
+    #main(style='margin-top:78px')
+      .container(style='height:90vh')#beginWindow
+        .row.flex-items-xs-middle(style='height:inherit')
+          .col-md-12.col-xs-12.text-xs-center
+            .well
+              h1 {{ page.title }}
+              hr
+              button.btn.btn-primary(onclick='scan()') Start the Session
+              
+      .container(style='display:none;')#scanWindow
+        .row.flex-items-xs-middle(style='height:inherit; padding: 10%;')
+          .col-md-2.col-xs-12.text-xs-center(style='text-align: center;')
+          #reader.col-md-8.col-xs-12.text-xs-center(style='text-align: center;width:500;height:350px;')
+          .col-md-2.col-xs-12.text-xs-center(style='text-align: center;')
+          .col-md-12.text-xs-center
+            button.btn.btn-primary(onclick='stopScan()', style='margin-top:5%') End Scan
+      
+      .container(style='display:none;min-height:90vh;')#finalize
+        .row.flex-items-xs-middle(style='height:inherit;')
+          .col-md-12.text-xs-center(style='height:inherit;')
+            button.btn.btn-primary(onclick='endSession()', style='margin-top:15%') End Session
+
+    {% include 'search/footer.html' %}    
+  script(src="{%static 'js/qrcode.min.js'%}")      
+  script(src='https://rawgit.com/dwa012/html5-qrcode/master/lib/jsqrcode-combined.min.js')
+  script(src="{% static 'js/merchant/transaction/scan.js' %}")

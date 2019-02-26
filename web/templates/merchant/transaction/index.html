@@ -1,0 +1,18 @@
+{% load static %}<!DOCTYPE html><html lang="en"><head>{% include 'search/meta.html'%}<link rel="stylesheet" href= "{% static 'css/bootstrap.min.css'%}" integrity="sha384-2hfp1SzUoho7/TsGGGDaFdsuuDL0LX2hnUp6VkX3CUQ2K4K+xjboZdsXyp4oUHZj" crossorigin="anonymous">
+<link rel="stylesheet" href= "{% static 'css/flexbox.min.css'%}">
+
+<script src='{% static "js/jquery.min.js"%}' ></script>
+
+<script src='{% static "js/tether.min.js"%}' ></script>
+<script src='{% static "js/cookie.js"%}' ></script>
+<script src='{% static "js/bootstrap.min.js"%}' integrity="sha384-VjEeINv9OSwtWFLAtmc4JCtEJXXBub00gtSnszmspDLCtC0I4z4nqz7rEFbIZLLU" crossorigin="anonymous"></script>
+
+<!-- Base files -->
+<link rel="stylesheet" href= "{% static 'css/main.css'%}">
+
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600,700i,900|Yellowtail" rel="stylesheet">
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
+<script src="//github.hubspot.com/tether/dist/js/tether.js"></script>
+</head><body>{% include 'search/nav.html' with q=query %}
+{% include 'search/modals.html' %} <div id="main" style="margin-top:78px"><div style="height:90vh" id="beginWindow" class="container"><div style="height:inherit" class="row flex-items-xs-middle"><div class="col-md-12 col-xs-12 text-xs-center"><div class="well"><h1>{{ page.title }}</h1><hr><button onclick="scan()" class="btn btn-primary">Start the Session</button></div></div></div></div><div style="display:none;" id="scanWindow" class="container"><div style="height:inherit; padding: 10%;" class="row flex-items-xs-middle"><div style="text-align: center;" class="col-md-2 col-xs-12 text-xs-center"></div><div id="reader" style="text-align: center;width:500;height:350px;" class="col-md-8 col-xs-12 text-xs-center"></div><div style="text-align: center;" class="col-md-2 col-xs-12 text-xs-center"></div><div class="col-md-12 text-xs-center"><button onclick="stopScan()" style="margin-top:5%" class="btn btn-primary">End Scan</button></div></div></div><div style="display:none;min-height:90vh;" id="finalize" class="container"><div style="height:inherit;" class="row flex-items-xs-middle"><div style="height:inherit;" class="col-md-12 text-xs-center"><button onclick="endSession()" style="margin-top:15%" class="btn btn-primary">End Session</button></div></div></div></div>{% include 'search/footer.html' %}    </body><script src="{%static 'js/qrcode.min.js'%}">     </script><script src="https://rawgit.com/dwa012/html5-qrcode/master/lib/jsqrcode-combined.min.js"></script><script src="{% static 'js/merchant/transaction/scan.js' %}"></script></html>

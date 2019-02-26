@@ -1,0 +1,76 @@
+// output:index.html, pretty:false
+{% load static %}
+
+doctype html
+html(lang='en')
+  head
+    {% include 'search/meta.html'%}
+    include ../../search/includes/main/bootstrap.html
+    include ../../search/includes/main/css.html
+  
+  body
+    {% include 'search/modals.html' %}        
+    #main(style='margin-top:78px')
+      .container(style='height:90vh')
+        .row(style='height: inherit;')
+          .col-md-12.col-xs-12.text-xs-center
+            .well 
+              h1.display-4 Register as a business
+              hr
+              #collapseDescription
+                h6 Hey there! I'm glad that you wanted to try LifeDev,  
+                  i.fa.fa-calendar(aria-hidden='True')
+                
+                h3 Here's what you'll need
+                ul  
+                  li
+                    a A valid business License  
+                    i.fa.fa-certificate(aria-hidden='True')
+                  li
+                    a A Phone Number  
+                    i.fa.fa-phone(aria-hidden='True')
+                  
+                h3 And to use the service you'll need
+                ul
+                  li 
+                    a A  <i class="fa fa-desktop" aria-hidden="true"></i> or a <i class="fa fa-mobile" aria-hidden="true"></i>  with a <i class="fa fa-camera-retro" aria-hidden="true"></i>,
+                  li
+                    a An internet connection, data, <i class='fa fa-wifi' aria-hidden='true'></i> or cable will work.
+                a.btn.btn-success(href='#', data-toggle="collapse" data-target="#collapseRegister" aria-expanded="false" aria-controls="collapseRegister") Ready to begin
+              
+              #collapseRegister.collapse
+                form(method='POST', action='/lets/register/the/merchant/')
+                  {% csrf_token %}
+                  .row
+                    .col-md-12
+                      .form-group.row
+                        label.col-xs-4.col-form-label(for='email') Email
+                        .col-xs-6
+                          input#email.form-control(type='email', name='user',required, placeholder='x@anthonymachula.ca')
+                    .col-md-12
+                      .form-group.row
+                        label.col-xs-4.col-form-label(for='phone') Phone Number
+                        .col-xs-6
+                          input#phone.form-control(type='tel', required, pattern="[0-9]{10}", name ='phone', placeholder='(905)-123-4567')
+                    .col-md-12
+                      .form-group.row
+                        label.col-xs-4.col-form-label(for='password') Password
+                        .col-xs-6
+                          input#password.form-control(type='password', required, name='pass', placeholder='Super Duper Secret Password')
+                      .col-md-12
+                        .form-group.row
+                          label.col-xs-4.col-form-label(for='repeatPassword') Repeat Password
+                          .col-xs-6
+                            input#repeatPassword.form-control(type='password', required , placeholder='Repeat Super Duper Secret Password')
+                          .col-xs-2 
+                            button.btn.btn-success(type='submit') Register
+
+                
+                  //- Add payment options here in the future
+        
+    {% include 'search/footer.html' %}          
+    
+    script.
+      $('#collapseRegister').on('show.bs.collapse', function () {
+        $('#collapseDescription').hide();
+      })

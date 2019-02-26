@@ -1,0 +1,47 @@
+// output:index.html, pretty:true
+{% load static %}
+
+doctype html
+html(lang='en')
+  head
+    {% include 'search/meta.html' %}
+    include ../search/includes/main/bootstrap.html
+    include ../search/includes/main/css.html
+
+
+  body
+    {% include 'search/nav.html' with q=query %}
+    {% include 'search/modals.html'%}
+    .container(style='margin-top:80px;')
+      .row
+        .col-md-12
+          .row
+            .col-xs-12.col-md-12            
+              h4
+                strong What is Hobby Hunter?
+              p
+                | Hobby Hunter, a fresh, new way to find and try new things. Now you don’t have an excuse, go for it.
+              h4
+                strong How does this work?
+              p Simple;
+              ul
+                li search, or tap on what.
+                li Find it.
+                li Book it. 
+                  
+              p Wasn’t that easy?
+              h4
+                strong Why would I use this?
+              p.
+                Because you are an adventurous, smart, and sometimes buck headed person, who does what he wants.
+              h4
+                strong Why can’t I pay through the app yet?
+              p Soon, give a little time.
+
+    script.
+      $(function () {
+      $('[data-toggle="tooltip"]').tooltip()
+      })
+      
+    
+      

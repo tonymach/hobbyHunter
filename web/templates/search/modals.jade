@@ -1,0 +1,105 @@
+//output:modals.html,pretty:false
+// Button trigger modal | add 
+{% load static %}
+
+//- RECAPTCHA
+//- SITE KEY   6LfSrwoUAAAAAJm_wx8W4hm43LXcICrBHTp2LKzH
+//- SECRET KEY 6LfSrwoUAAAAAKsGKCz58cVlW6eITIWR1wNmyIRA
+//- 
+
+script(src='https://www.google.com/recaptcha/api.js')
+
+#signup.modal.fade(tabindex='-1', role='dialog', aria-labelledby='Signup', aria-hidden='true')
+  .modal-dialog(role='document')
+    .modal-content
+      .modal-header
+        button.close(type='button', data-dismiss='modal', aria-label='Close')
+          span(aria-hidden='true')
+            i.fa.fa-times(aria-hidden='')
+        h4#myModalLabel.modal-title Signup
+      .modal-body
+        form#signupForm(method='POST', action='/lets/register/')
+          {% csrf_token %} 
+          .form-group
+            label(for='exampleInputEmail1') Email address
+            input#registerUsername.form-control(type='email', aria-describedby='emailHelp', placeholder='Enter email',name='user')
+            small#emailHelp.form-text.text-muted We'll never share your email with anyone else.
+          .form-group
+            label(for='InputPassword') Password
+            input#registerPassword.form-control(type='password', placeholder='Password',name='pass')
+          .form-group
+            label(for='InputPasswordCheck') Double check Password
+            input#registerPasswordRepeat.form-control(type='password', placeholder='Password again (sorries)')
+          .form-group
+            .g-recaptcha(data-sitekey='6LfSrwoUAAAAAJm_wx8W4hm43LXcICrBHTp2LKzH')
+
+            button.btn.btn-primary(type='submit') Submit
+
+              
+      //- .modal-footer
+      //-   button.btn.btn-secondary(type='button', data-dismiss='modal') Close
+      
+      
+#login.modal.fade(tabindex='-1', role='dialog', aria-labelledby='Signup', aria-hidden='true')
+  .modal-dialog(role='document')
+    .modal-content
+      .modal-header
+        button.close(type='button', data-dismiss='modal', aria-label='Close')
+          span(aria-hidden='true')
+            i.fa.fa-times(aria-hidden='')
+        h4#myModalLabel.modal-title Login
+      .modal-body
+        form(method='POST', action='/lets/login/')
+          {% csrf_token %} 
+          .form-group
+            label(for='exampleInputEmail1') Email address
+            input#exampleInputEmail1.form-control(type='text', aria-describedby='emailHelp', placeholder='Enter email', name='user')
+            small#emailHelp.form-text.text-muted We'll never share your email with anyone else.
+          .form-group
+            label(for='InputPassword') Password
+            input#InputPassword.form-control(type='password', placeholder='Password', name='pass')
+          .form-group
+            .g-recaptcha(data-sitekey='6LfSrwoUAAAAAJm_wx8W4hm43LXcICrBHTp2LKzH')
+
+            button.btn.btn-primary(type='submit') Submit
+
+
+#authorize.modal.fade(tabindex='-1', role='dialog', aria-labelledby='Authorize', aria-hidden='true')
+  .modal-dialog(role='document')
+    .modal-content
+      .modal-header
+        button.close(type='button', data-dismiss='modal', aria-label='Close')
+          span(aria-hidden='true')
+            i.fa.fa-times(aria-hidden='')
+        h4#myModalLabel.modal-title Authorize
+      .modal-body
+        form#authorizeForm
+          {% csrf_token %} 
+          .form-group
+            label(for='authorizePassword') Enter your Password to Authorize action
+            input#authorizePassword.form-control(type='password', placeholder='Password', name='pass')
+          .form-group
+            .g-recaptcha(data-sitekey='6LfSrwoUAAAAAJm_wx8W4hm43LXcICrBHTp2LKzH')
+
+          button.btn.btn-primary(type='submit') Authorize
+
+
+          
+#loginOrRegister.modal.fade(tabindex='-1', role='dialog', aria-labelledby='Authorize', aria-hidden='true')
+  .modal-dialog(role='document')
+    .modal-content
+      .modal-header
+        button.close(type='button', data-dismiss='modal', aria-label='Close')
+          span(aria-hidden='true')
+            i.fa.fa-times(aria-hidden='')
+        h4#myModalLabel.modal-title 
+      .modal-body.text-xs-center
+        h1.upper
+          a(onclick='login()') login 
+          span or  
+          a(onclick='register()') register
+
+
+          
+script(src="{% static 'js/authorize/loginRegister.js' %}")
+script(src="{% static 'js/authorize/authorize.js' %}")

@@ -1,0 +1,35 @@
+// output:index.html, pretty:false
+{% load static %}
+
+doctype html
+html(lang='en')
+  head
+    {% include 'search/meta.html'%}
+    include ../search/includes/main/bootstrap.html
+    include ../search/includes/main/css.html
+  
+  body
+    {% include 'search/nav.html' with q=query %}
+    {% include 'search/modals.html' %}        
+    #main(style='margin-top:78px')
+      .container(style='height:90vh')
+        .row
+          .col-md-6.col-xs-12.text-xs-center
+            .well
+                h1 Today, October 21st, 2016
+          .col-md-1.col-xs-1
+            .row.flex-items-xs-middle
+              .col-xs-12
+                a(onclick='up()')
+                  i.fa.fa-plus.calendarButton(aria-hidden='true')
+                br
+                a(onclick='down()')
+                  i.fa.fa-minus.calendarButton(aria-hidden='true')
+          .col-md-5.col-xs-11
+            input.form-control(type='date', placeholder='When', name='date' value='{{datetime}}')      
+          .col-xs-12
+            hr  
+          .col-xs-12(style='margin-top:15vh')
+            {% include 'search/tryme.html' %}
+    {% include 'search/footer.html' %}          
+    

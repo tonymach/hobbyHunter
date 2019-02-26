@@ -1,0 +1,13 @@
+Django
+gunicorn
+psycopg2
+django-qrcode
+jsonfield
+rsa
+pyaes
+python-dateutil
+pillow
+django-imagekit
+django-s3-storage
+boto
+django-cors-headers

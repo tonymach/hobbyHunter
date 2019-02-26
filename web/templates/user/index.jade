@@ -1,0 +1,16 @@
+// output:index.html, pretty:false
+{% load static %}
+
+doctype html
+html(lang='en')
+  head
+    {% include 'search/meta.html'%}
+    include ../search/includes/main/bootstrap.html
+    include ../search/includes/main/css.html
+  
+  body
+    {% include 'search/nav.html' with q=query %}
+    {% include 'search/modals.html' %}        
+    {% include 'calendar/calendar.html' with pages=pages %}
+    {% include 'search/footer.html' %}          
+    
