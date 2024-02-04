@@ -4,7 +4,7 @@ class Master(object):
     as well as many other default values
     """
     def __init__(self):
-        self.isLocal = False
+        self.isLocal = False    
         self.isExternalDb = False
         self.trialSessions = 10
 

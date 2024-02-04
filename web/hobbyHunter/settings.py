@@ -34,7 +34,7 @@ SECRET_KEY = '0%*x#_obi$9ixy02g*dq4+a-yn!&6&h&@nm$dq)9&f#w5(uvwi'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['hobbyhunter.ca']
+ALLOWED_HOSTS = ['*']
 
 AUTH_USER_MODEL = 'core.User'
 
@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
+    'django.contrib.admin',
 
     'qrcode',
     'imagekit',
@@ -100,6 +101,7 @@ TEMPLATES = [
 ]
 WSGI_APPLICATION = 'hobbyHunter.wsgi.application'
 
+SITE_ID=1
 
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
@@ -108,24 +110,24 @@ if local and not externalDb:
 
     DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': 'cheq',
-            'USER': 'postgres',
-            'PASSWORD': 'evil',
-            'HOST': 'localhost',
-            'PORT': '',
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'mydb',              # Replace with your database name
+            'USER': 'myuser',            # Replace with your database user
+            'PASSWORD': 'mypassword',    # Replace with your database password
+            'HOST': 'db',                # Use the service name 'db'
+            'PORT': '5432',              # PostgreSQL default port
         }
     }
 
 else:
     DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': 'sourdough',
-            'USER': 'zombie',
-            'PASSWORD': 'aomg2000',
-            'HOST': 'breadloaf.ccsemegdheah.us-east-1.rds.amazonaws.com',
-            'PORT': '5432',
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'mydb',              # Replace with your database name
+            'USER': 'myuser',            # Replace with your database user
+            'PASSWORD': 'mypassword',    # Replace with your database password
+            'HOST': 'db',                # Use the service name 'db'
+            'PORT': '5432',              # PostgreSQL default port
         }
     }
 
@@ -168,10 +170,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 #
-# if not local:
-#
-#     STATIC_URL = '/static/'
-#     STATIC_ROOT =  "/var/www/hobbyhunter/static/"
+if not local:
+
+    STATIC_URL = '/static/'
+    STATIC_ROOT =  "/var/www/hobbyhunter/static/"
 
 if local:
     STATIC_URL = '/hay/'
@@ -205,81 +207,81 @@ INTERNAL_IPS = [
 #
 
 if not local:
+    pass
+    # DEFAULT_FILE_STORAGE = "django_s3_storage.storage.S3Storage"
+    # STATICFILES_STORAGE = "django_s3_storage.storage.StaticS3Storage"
 
-    DEFAULT_FILE_STORAGE = "django_s3_storage.storage.S3Storage"
-    STATICFILES_STORAGE = "django_s3_storage.storage.StaticS3Storage"
+    # INSTALLED_APPS.append('django_s3_storage')
 
-    INSTALLED_APPS.append('django_s3_storage')
+    # # The region to connect to when storing files.
+    # AWS_REGION = "us-east-1"
 
-    # The region to connect to when storing files.
-    AWS_REGION = "us-east-1"
+    # AWS_S3_BUCKET_NAME = 'hobbyhuntermedia'
 
-    AWS_S3_BUCKET_NAME = 'hobbyhuntermedia'
+    # # The AWS access key used to access the storage buckets.
+    # AWS_ACCESS_KEY_ID = "AKIAJPINS54IKETKVYPQ"
 
-    # The AWS access key used to access the storage buckets.
-    AWS_ACCESS_KEY_ID = "AKIAJPINS54IKETKVYPQ"
+    # # The AWS secret access key used to access the storage buckets.
+    # AWS_SECRET_ACCESS_KEY = "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"
 
-    # The AWS secret access key used to access the storage buckets.
-    AWS_SECRET_ACCESS_KEY = "X1bLvQo5bAiMsEtKAT0sB19GN4q3/85aJC7k6PuL"
+    # # The S3 bucket used to store uploaded files.
+    # AWS_S3_BUCKET_NAME = "hobbyhunter"
 
-    # The S3 bucket used to store uploaded files.
-    AWS_S3_BUCKET_NAME = "hobbyhunter"
+    # # The S3 calling format to use to connect to the bucket.
+    # AWS_S3_CALLING_FORMAT = "boto.s3.connection.OrdinaryCallingFormat"
 
-    # The S3 calling format to use to connect to the bucket.
-    AWS_S3_CALLING_FORMAT = "boto.s3.connection.OrdinaryCallingFormat"
+    # # The host to connect to (only needed if you are using a non-AWS host)
+    # AWS_S3_HOST = ""
 
-    # The host to connect to (only needed if you are using a non-AWS host)
-    AWS_S3_HOST = ""
+    # # A prefix to add to the start of all uploaded files.
+    # AWS_S3_KEY_PREFIX = ""
 
-    # A prefix to add to the start of all uploaded files.
-    AWS_S3_KEY_PREFIX = ""
+    # # Whether to enable querystring authentication for uploaded files.
+    # AWS_S3_BUCKET_AUTH = True
 
-    # Whether to enable querystring authentication for uploaded files.
-    AWS_S3_BUCKET_AUTH = True
+    # # The expire time used to access uploaded files.
+    # AWS_S3_MAX_AGE_SECONDS = 60*60  # 1 hour.
 
-    # The expire time used to access uploaded files.
-    AWS_S3_MAX_AGE_SECONDS = 60*60  # 1 hour.
+    # # A custom URL prefix to use for public-facing URLs for uploaded files.
+    # AWS_S3_PUBLIC_URL = ""
 
-    # A custom URL prefix to use for public-facing URLs for uploaded files.
-    AWS_S3_PUBLIC_URL = ""
+    # # Whether to set the storage class of uploaded files to REDUCED_REDUNDANCY.
+    # AWS_S3_REDUCED_REDUNDANCY = False
 
-    # Whether to set the storage class of uploaded files to REDUCED_REDUNDANCY.
-    AWS_S3_REDUCED_REDUNDANCY = False
-
-    # A dictionary of additional metadata to set on the uploaded files.
-    # If the value is a callable, it will be called with the path of the file on S3.
-    AWS_S3_METADATA = {}
+    # # A dictionary of additional metadata to set on the uploaded files.
+    # # If the value is a callable, it will be called with the path of the file on S3.
+    # AWS_S3_METADATA = {}
 
     # Whether to enable gzip compression for uploaded files.
-    AWS_S3_GZIP = True
+    # AWS_S3_GZIP = True
 
     # The S3 bucket used to store static files.
-    AWS_S3_BUCKET_NAME_STATIC = "hobbyhunterstatic"
+    # AWS_S3_BUCKET_NAME_STATIC = "hobbyhunterstatic"
 
     # The S3 calling format to use to connect to the static bucket.
-    AWS_S3_CALLING_FORMAT_STATIC = "boto.s3.connection.OrdinaryCallingFormat"
+    # AWS_S3_CALLING_FORMAT_STATIC = "boto.s3.connection.OrdinaryCallingFormat"
 
     # The host to connect to for static files (only needed if you are using a non-AWS host)
-    AWS_S3_HOST_STATIC = ""
+    # AWS_S3_HOST_STATIC = ""
 
-    # Whether to enable querystring authentication for static files.
-    AWS_S3_BUCKET_AUTH_STATIC = False
+    # # Whether to enable querystring authentication for static files.
+    # AWS_S3_BUCKET_AUTH_STATIC = False
 
-    # A prefix to add to the start of all static files.
-    AWS_S3_KEY_PREFIX_STATIC = ""
+    # # A prefix to add to the start of all static files.
+    # AWS_S3_KEY_PREFIX_STATIC = ""
 
-    # The expire time used to access static files.
-    AWS_S3_MAX_AGE_SECONDS_STATIC = 60*60*24*365  # 1 year.
+    # # The expire time used to access static files.
+    # AWS_S3_MAX_AGE_SECONDS_STATIC = 60*60*24*365  # 1 year.
 
-    # A custom URL prefix to use for public-facing URLs for static files.
-    AWS_S3_PUBLIC_URL_STATIC = ""
+    # # A custom URL prefix to use for public-facing URLs for static files.
+    # AWS_S3_PUBLIC_URL_STATIC = ""
 
-    # Whether to set the storage class of static files to REDUCED_REDUNDANCY.
-    AWS_S3_REDUCED_REDUNDANCY_STATIC = False
+    # # Whether to set the storage class of static files to REDUCED_REDUNDANCY.
+    # AWS_S3_REDUCED_REDUNDANCY_STATIC = False
 
-    # A dictionary of additional metadata to set on the static files.
-    # If the value is a callable, it will be called with the path of the file on S3.
-    AWS_S3_METADATA_STATIC = {}
+    # # A dictionary of additional metadata to set on the static files.
+    # # If the value is a callable, it will be called with the path of the file on S3.
+    # AWS_S3_METADATA_STATIC = {}
 
-    # Whether to enable gzip compression for static files.
-    AWS_S3_GZIP_STATIC = True
+    # # Whether to enable gzip compression for static files.
+    # AWS_S3_GZIP_STATIC = True

@@ -1,13 +1,13 @@
-Django
-gunicorn
-psycopg2
-django-qrcode
-jsonfield
-rsa
-pyaes
-python-dateutil
-pillow
-django-imagekit
-django-s3-storage
-boto
-django-cors-headers
+Django==2.2
+gunicorn==19.9.0
+psycopg2==2.8.6
+django-qrcode==0.2.5  # Note: Version is estimated; adjust as necessary
+jsonfield==2.0.2
+rsa==4.0
+pyaes==1.6.1
+python-dateutil==2.8.0
+Pillow==6.0.0
+django-imagekit==4.0.2
+django-s3-storage==0.13.0
+boto3==1.9.253  # Assuming you need boto3 instead of boto for Django-s3-storage
+django-cors-headers==3.0.2
